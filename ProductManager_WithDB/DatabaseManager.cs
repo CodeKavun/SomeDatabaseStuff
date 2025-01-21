@@ -69,6 +69,17 @@ namespace ProductManager_WithDB
             reader.Close();
         }
 
+        public static void AddProduct(string productName, int amount, decimal price, int categoryId, int providerId)
+        {
+            string sqlQuery = $"INSERT INTO Products VALUES (N'{productName}', {amount}, {price.ToString().Replace(',', '.')}, {categoryId}, {providerId});";
+
+            SqlCommand sqlCommand = connection.CreateCommand();
+            sqlCommand.CommandText = sqlQuery;
+            sqlCommand.ExecuteNonQuery();
+        }
+
+        public static void Close() => connection.Close();
+
         private static string GetConditionQuery()
         {
             if (CategoryFilterId == 0 && ProviderFilterId == 0) return string.Empty;

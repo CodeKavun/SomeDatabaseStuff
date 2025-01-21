@@ -24,5 +24,21 @@ namespace ProductManager_WithDB
             DatabaseManager.ProviderFilterId = providersFilter.SelectedIndex;
             DatabaseManager.DisplayData(dataTableView);
         }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DatabaseManager.Close();
+        }
+
+        private void addProductBtn_Click(object sender, EventArgs e)
+        {
+            InsertProductForm productForm = new InsertProductForm();
+            productForm.ShowDialog();
+        }
+
+        private void updListBtn_Click(object sender, EventArgs e)
+        {
+            DatabaseManager.DisplayData(dataTableView);
+        }
     }
 }

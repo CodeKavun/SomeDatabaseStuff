@@ -39,6 +39,8 @@
             label1 = new Label();
             label2 = new Label();
             providersFilter = new ComboBox();
+            addProductBtn = new Button();
+            updListBtn = new Button();
             SuspendLayout();
             // 
             // dataTableView
@@ -120,11 +122,33 @@
             providersFilter.Text = "All";
             providersFilter.SelectedIndexChanged += providersFilter_SelectedIndexChanged;
             // 
+            // addProductBtn
+            // 
+            addProductBtn.Location = new Point(12, 12);
+            addProductBtn.Name = "addProductBtn";
+            addProductBtn.Size = new Size(121, 23);
+            addProductBtn.TabIndex = 5;
+            addProductBtn.Text = "Add Product";
+            addProductBtn.UseVisualStyleBackColor = true;
+            addProductBtn.Click += addProductBtn_Click;
+            // 
+            // updListBtn
+            // 
+            updListBtn.Location = new Point(691, 75);
+            updListBtn.Name = "updListBtn";
+            updListBtn.Size = new Size(97, 23);
+            updListBtn.TabIndex = 6;
+            updListBtn.Text = "Update List";
+            updListBtn.UseVisualStyleBackColor = true;
+            updListBtn.Click += updListBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(updListBtn);
+            Controls.Add(addProductBtn);
             Controls.Add(providersFilter);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -135,6 +159,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Database Manager";
+            FormClosed += Form1_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -152,5 +177,7 @@
         private Label label1;
         private Label label2;
         private ComboBox providersFilter;
+        private Button addProductBtn;
+        private Button updListBtn;
     }
 }
