@@ -27,24 +27,32 @@ namespace StationaryStuffManager
         {
             listView.Items.Clear();
 
-            
+            string query = "SELECT Stationaries.*, StationaryTypes.TypeName, StationaryTypes.Amount, Companies.CompanyName, Managers.ManagerName"
+                + " FROM Stationaries JOIN StationaryTypes ON Stationaries.TypeId = StationaryTypes.Id"
+                + " JOIN Companies ON Stationaries.CompanyId = Companies.Id"
+                + " JOIN Managers ON Stationaries.ManagerId = Managers.Id ";
 
             SqlCommand sqlCommand = connection.CreateCommand();
-            //sqlCommand.CommandText = sqlQuery;
+            sqlCommand.CommandText = query;
 
             SqlDataReader reader = sqlCommand.ExecuteReader();
+            int line = 0;
+
             while (reader.Read())
             {
                 ListViewItem item = new ListViewItem([
-                    reader.GetInt32("Id").ToString(),
-                    reader.GetString("ProductName"),
-                    reader.GetInt32("Amount").ToString(),
-                    reader.GetDecimal("OriginalPrice").ToString(),
-                    reader.GetString("CategoryName"),
-                    reader.GetString("ProviderName")
+                    reader.GetInt64("Id").ToString(),
+                    reader.GetString("StationaryName"),
+                    reader.GetDecimal("Price").ToString(),
+                    reader.GetString("TypeName"),
+                    reader.GetString("CompanyName"),
+                    reader.GetString("ManagerName"),
+                    reader.GetDateTime("SellDate").ToString()
                 ]);
 
                 listView.Items.Add(item);
+                
+                line++;
             }
 
             reader.Close();
