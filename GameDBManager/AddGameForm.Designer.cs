@@ -38,6 +38,11 @@
             releaseDatePicker = new DateTimePicker();
             doneBtn = new Button();
             button1 = new Button();
+            label5 = new Label();
+            label6 = new Label();
+            mpChecker = new CheckBox();
+            unitsNumberInput = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)unitsNumberInput).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -125,11 +130,50 @@
             button1.Text = "Cancel";
             button1.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 185);
+            label5.Name = "label5";
+            label5.Size = new Size(90, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Has Multiplayer";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(12, 218);
+            label6.Name = "label6";
+            label6.Size = new Size(60, 15);
+            label6.TabIndex = 11;
+            label6.Text = "Sold Units";
+            // 
+            // mpChecker
+            // 
+            mpChecker.AutoSize = true;
+            mpChecker.Location = new Point(108, 186);
+            mpChecker.Name = "mpChecker";
+            mpChecker.Size = new Size(15, 14);
+            mpChecker.TabIndex = 12;
+            mpChecker.UseVisualStyleBackColor = true;
+            // 
+            // unitsNumberInput
+            // 
+            unitsNumberInput.Location = new Point(78, 216);
+            unitsNumberInput.Maximum = new decimal(new int[] { 400000000, 0, 0, 0 });
+            unitsNumberInput.Name = "unitsNumberInput";
+            unitsNumberInput.Size = new Size(120, 23);
+            unitsNumberInput.TabIndex = 13;
+            // 
             // AddGameForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(371, 329);
+            Controls.Add(unitsNumberInput);
+            Controls.Add(mpChecker);
+            Controls.Add(label6);
+            Controls.Add(label5);
             Controls.Add(button1);
             Controls.Add(doneBtn);
             Controls.Add(releaseDatePicker);
@@ -145,6 +189,7 @@
             Name = "AddGameForm";
             Text = "AddGameForm";
             Load += AddGameForm_Load;
+            ((System.ComponentModel.ISupportInitialize)unitsNumberInput).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -161,5 +206,9 @@
         private DateTimePicker releaseDatePicker;
         private Button doneBtn;
         private Button button1;
+        private Label label5;
+        private Label label6;
+        private CheckBox mpChecker;
+        private NumericUpDown unitsNumberInput;
     }
 }

@@ -34,6 +34,8 @@ namespace GameDBManager
             game.StudioDeveloper = studioInput.Text;
             game.Style = styleInput.Text;
             game.ReleaseDate = releaseDatePicker.Value;
+            game.HasMultiplayer = mpChecker.Checked;
+            game.SoldUnits = (int)unitsNumberInput.Value;
         }
 
         private void AddGameForm_Load(object sender, EventArgs e)
@@ -44,6 +46,9 @@ namespace GameDBManager
 
             if (game.ReleaseDate >= releaseDatePicker.MinDate)
                 releaseDatePicker.Value = game.ReleaseDate;
+
+            mpChecker.Checked = game.HasMultiplayer;
+            unitsNumberInput.Value = game.SoldUnits;
         }
     }
 }

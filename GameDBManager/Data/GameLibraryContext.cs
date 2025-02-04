@@ -16,7 +16,7 @@ namespace GameDBManager.Data
 
         public GameLibraryContext()
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

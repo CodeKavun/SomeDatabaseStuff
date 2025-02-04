@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameDBManager.Migrations
 {
     [DbContext(typeof(GameLibraryContext))]
-    [Migration("20250203123117_AddMoreInfoIntoGameModel")]
-    partial class AddMoreInfoIntoGameModel
+    [Migration("20250203165923_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,18 +33,12 @@ namespace GameDBManager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("HasMultiplayer")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("SoldUnits")
-                        .HasColumnType("int");
 
                     b.Property<string>("StudioDeveloper")
                         .IsRequired()

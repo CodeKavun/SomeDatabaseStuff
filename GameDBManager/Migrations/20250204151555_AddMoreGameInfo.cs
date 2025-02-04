@@ -5,7 +5,7 @@
 namespace GameDBManager.Migrations
 {
     /// <inheritdoc />
-    public partial class AddMoreInfoIntoGameModel : Migration
+    public partial class AddMoreGameInfo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

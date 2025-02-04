@@ -11,10 +11,22 @@ namespace GameDBManager
         Year
     }
 
+    public enum GameOrder
+    {
+        All,
+        Singleplayer,
+        Multiplayer,
+        MostPopular,
+        LeastPopular,
+        Top3Popular,
+        Top3Unpopular
+    }
+
     public partial class Form1 : Form
     {
         private GameLibraryContext gameLibraryContext;
         private SearchBy searchBy = SearchBy.Name;
+        private GameOrder gameOrder = GameOrder.All;
 
         public Form1()
         {
@@ -24,20 +36,51 @@ namespace GameDBManager
             LoadDataToView(listView1);
 
             searchOption.DataSource = Enum.GetNames<SearchBy>();
+            groupOrderSelection.DataSource = Enum.GetNames<GameOrder>();
         }
 
         private void LoadDataToView(ListView listView)
         {
             listView.Items.Clear();
 
-            foreach (Game game in gameLibraryContext.Games)
+            List<Game> games = [];
+            switch (gameOrder)
+            {
+                case GameOrder.All:
+                    games = [.. gameLibraryContext.Games];
+                    break;
+                case GameOrder.Singleplayer:
+                    games = [.. gameLibraryContext.Games.Where(game => !game.HasMultiplayer)];
+                    break;
+                case GameOrder.Multiplayer:
+                    games = [.. gameLibraryContext.Games.Where(game => game.HasMultiplayer)];
+                    break;
+                case GameOrder.MostPopular:
+                    int maxUnits = gameLibraryContext.Games.Max(game => game.SoldUnits);
+                    games = [gameLibraryContext.Games.Single(game => game.SoldUnits == maxUnits)];
+                    break;
+                case GameOrder.LeastPopular:
+                    int minUnits = gameLibraryContext.Games.Min(game => game.SoldUnits);
+                    games = [gameLibraryContext.Games.Single(game => game.SoldUnits == minUnits)];
+                    break;
+                case GameOrder.Top3Popular:
+                    games = [.. gameLibraryContext.Games.OrderByDescending(game => game.SoldUnits).Take(3)];
+                    break;
+                case GameOrder.Top3Unpopular:
+                    games = [.. gameLibraryContext.Games.OrderBy(game => game.SoldUnits).Take(3)];
+                    break;
+            }
+
+            foreach (Game game in games)
             {
                 ListViewItem listItem = new ListViewItem([
                     game.Id.ToString(),
                     game.Name,
                     game.StudioDeveloper,
                     game.Style,
-                    game.ReleaseDate.ToString()
+                    game.ReleaseDate.ToString(),
+                    game.HasMultiplayer ? "Yes" : "No",
+                    game.SoldUnits.ToString()
                     ]);
 
                 listView.Items.Add(listItem);
@@ -175,6 +218,15 @@ namespace GameDBManager
         private void searchBtn_Click(object sender, EventArgs e)
         {
             Search();
+        }
+
+        private void groupOrderSelection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (groupOrderSelection.SelectedIndex != -1)
+            {
+                gameOrder = (GameOrder)groupOrderSelection.SelectedIndex;
+                LoadDataToView(listView1);
+            }
         }
     }
 }

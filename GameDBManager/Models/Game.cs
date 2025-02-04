@@ -13,5 +13,7 @@ namespace GameDBManager.Models
         public string StudioDeveloper { get; set; } = default!;
         public string Style { get; set; } = default!;
         public DateTime ReleaseDate { get; set; }
+        public bool HasMultiplayer { get; set; }
+        public int SoldUnits { get; set; }
     }
 }

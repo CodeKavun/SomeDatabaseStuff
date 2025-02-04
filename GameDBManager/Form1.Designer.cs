@@ -34,6 +34,8 @@
             gameStudio = new ColumnHeader();
             gameStyle = new ColumnHeader();
             gameRelease = new ColumnHeader();
+            hasMp = new ColumnHeader();
+            soldUnits = new ColumnHeader();
             addGameBtn = new Button();
             editGameBtn = new Button();
             delGameBtn = new Button();
@@ -41,16 +43,17 @@
             searchBtn = new Button();
             searchOption = new ComboBox();
             label1 = new Label();
+            groupOrderSelection = new ComboBox();
             SuspendLayout();
             // 
             // listView1
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { gameId, gameName, gameStudio, gameStyle, gameRelease });
+            listView1.Columns.AddRange(new ColumnHeader[] { gameId, gameName, gameStudio, gameStyle, gameRelease, hasMp, soldUnits });
             listView1.FullRowSelect = true;
             listView1.Location = new Point(12, 92);
             listView1.MultiSelect = false;
             listView1.Name = "listView1";
-            listView1.Size = new Size(776, 346);
+            listView1.Size = new Size(1006, 414);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -79,6 +82,16 @@
             // 
             gameRelease.Text = "Release Date";
             gameRelease.Width = 150;
+            // 
+            // hasMp
+            // 
+            hasMp.Text = "Has Multiplayer";
+            hasMp.Width = 100;
+            // 
+            // soldUnits
+            // 
+            soldUnits.Text = "Sold Units";
+            soldUnits.Width = 140;
             // 
             // addGameBtn
             // 
@@ -112,14 +125,14 @@
             // 
             // searchInput
             // 
-            searchInput.Location = new Point(338, 63);
+            searchInput.Location = new Point(568, 63);
             searchInput.Name = "searchInput";
             searchInput.Size = new Size(357, 23);
             searchInput.TabIndex = 4;
             // 
             // searchBtn
             // 
-            searchBtn.Location = new Point(701, 63);
+            searchBtn.Location = new Point(931, 63);
             searchBtn.Name = "searchBtn";
             searchBtn.Size = new Size(87, 23);
             searchBtn.TabIndex = 5;
@@ -130,7 +143,7 @@
             // searchOption
             // 
             searchOption.FormattingEnabled = true;
-            searchOption.Location = new Point(211, 63);
+            searchOption.Location = new Point(441, 63);
             searchOption.Name = "searchOption";
             searchOption.Size = new Size(121, 23);
             searchOption.TabIndex = 6;
@@ -139,17 +152,27 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(149, 66);
+            label1.Location = new Point(379, 66);
             label1.Name = "label1";
             label1.Size = new Size(58, 15);
             label1.TabIndex = 7;
             label1.Text = "Search by";
             // 
+            // groupOrderSelection
+            // 
+            groupOrderSelection.FormattingEnabled = true;
+            groupOrderSelection.Location = new Point(12, 58);
+            groupOrderSelection.Name = "groupOrderSelection";
+            groupOrderSelection.Size = new Size(121, 23);
+            groupOrderSelection.TabIndex = 8;
+            groupOrderSelection.SelectedIndexChanged += groupOrderSelection_SelectedIndexChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1030, 518);
+            Controls.Add(groupOrderSelection);
             Controls.Add(label1);
             Controls.Add(searchOption);
             Controls.Add(searchBtn);
@@ -182,5 +205,8 @@
         private Button searchBtn;
         private ComboBox searchOption;
         private Label label1;
+        private ColumnHeader hasMp;
+        private ColumnHeader soldUnits;
+        private ComboBox groupOrderSelection;
     }
 }
